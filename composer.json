@@ -1,0 +1,28 @@
+{
+	"name": "icybee/module-users-roles",
+	"type": "icanboogie-module",
+	"description": "Provides roles for users.",
+	"keywords": [ "user", "roles" ],
+	"license": "BSD-3-Clause",
+	"authors": [
+		{
+			"name": "Olivier Laviale",
+			"email": "olivier.laviale@gmail.com",
+			"homepage": "http://www.weirdog.com/",
+			"role" : "Developer"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/Icybee/module-users-roles/issues",
+		"source": "https://github.com/Icybee/module-users-roles"
+	},
+	"minimum-stability": "dev",
+	"require": {
+		"php": ">=5.3.0",
+		"icanboogie/module-installer": "*",
+		"icybee/module-users": "2.x"
+	},
+	"autoload": {
+		"classmap": [ "lib" ]
+	}
+}
