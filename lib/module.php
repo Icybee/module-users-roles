@@ -25,7 +25,7 @@ class Module extends \Icybee\Module
 {
 	const OPERATION_PERMISSIONS = 'permissions';
 
-	public static $levels = array
+	static public $levels = array
 	(
 		self::PERMISSION_NONE => 'none',
 		self::PERMISSION_ACCESS => 'access',
