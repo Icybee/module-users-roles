@@ -253,7 +253,7 @@ EOT;
 		}
 
 		$user_has_access = $core->user->has_permission(Module::PERMISSION_ADMINISTER, $this->module);
-		$routes = \ICanBoogie\Routes::get();
+		$routes = $core->routes;
 
 		foreach ($packages as $p_name => $modules)
 		{
