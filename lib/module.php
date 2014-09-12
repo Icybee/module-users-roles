@@ -13,13 +13,6 @@ namespace Icybee\Modules\Users\Roles;
 
 use ICanBoogie\ActiveRecord\RecordNotFound;
 use ICanBoogie\I18n;
-use ICanBoogie\Operation;
-use ICanBoogie\Route;
-
-use Brickrouge\Button;
-use Brickrouge\Element;
-use Brickrouge\Form;
-use Brickrouge\Text;
 
 class Module extends \Icybee\Module
 {
