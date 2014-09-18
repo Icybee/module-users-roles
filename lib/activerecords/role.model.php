@@ -11,7 +11,6 @@
 
 namespace Icybee\Modules\Users\Roles;
 
-use ICanBoogie\Exception;
 use ICanBoogie\I18n;
 
 /**
@@ -34,13 +33,13 @@ class Model extends \ICanBoogie\ActiveRecord\Model
 	}
 
 	/**
-	 * @throws Exception when on tries to delete the role with identifier "1".
+	 * @throws \Exception when on tries to delete the role with identifier "1".
 	 */
 	public function delete($rid)
 	{
 		if ($rid == 1)
 		{
-			throw new Exception('The role %role (%rid) cannot be deleted.', array('%role' => I18n\t('Visitor'), '%rid' => $rid));
+			throw new \Exception(\ICanBoogie\format('The role %role (%rid) cannot be deleted.', array('%role' => I18n\t('Visitor'), '%rid' => $rid)));
 		}
 
 		// FIXME-20110709: deleted role is not removed from users records.
