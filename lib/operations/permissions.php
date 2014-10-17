@@ -11,6 +11,8 @@
 
 namespace Icybee\Modules\Users\Roles;
 
+use ICanBoogie\Module\Descriptor;
+
 class PermissionsOperation extends \ICanBoogie\Operation
 {
 	protected function get_controls()
@@ -56,7 +58,7 @@ class PermissionsOperation extends \ICanBoogie\Operation
 						# the module defines his permission level
 						#
 
-						$p[$perm] = $core->modules->descriptors[$perm][Module::T_PERMISSION];
+						$p[$perm] = $core->modules->descriptors[$perm][Descriptor::PERMISSION];
 
 						continue;
 					}

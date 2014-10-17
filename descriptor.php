@@ -3,13 +3,13 @@
 namespace Icybee\Modules\Users\Roles;
 
 use ICanBoogie\ActiveRecord\Model;
-use ICanBoogie\Module;
+use ICanBoogie\Module\Descriptor;
 
 return array
 (
-	Module::T_CATEGORY => 'users',
-	Module::T_DESCRIPTION => 'Role management',
-	Module::T_MODELS => array
+	Descriptor::CATEGORY => 'users',
+	Descriptor::DESCRIPTION => 'Role management',
+	Descriptor::MODELS => array
 	(
 		'primary' => array
 		(
@@ -25,8 +25,8 @@ return array
 		)
 	),
 
-	Module::T_NAMESPACE => __NAMESPACE__,
-	Module::T_REQUIRED => true,
-	Module::T_TITLE => 'Roles',
-	Module::T_VERSION => '1.0'
+	Descriptor::NS => __NAMESPACE__,
+	Descriptor::REQUIRED => true,
+	Descriptor::TITLE => 'Roles',
+	Descriptor::VERSION => '1.0'
 );

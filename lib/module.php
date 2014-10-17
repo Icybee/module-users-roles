@@ -12,6 +12,7 @@
 namespace Icybee\Modules\Users\Roles;
 
 use ICanBoogie\ActiveRecord\RecordNotFound;
+use ICanBoogie\ActiveRecord\StatementNotValid;
 use ICanBoogie\I18n;
 
 class Module extends \Icybee\Module
@@ -94,7 +95,7 @@ class Module extends \Icybee\Module
 		{
 			$this->model->find(array(1, 2));
 		}
-		catch (StatementInvalid $e)
+		catch (StatementNotValid $e)
 		{
 			/* the model */
 		}

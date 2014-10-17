@@ -12,6 +12,7 @@
 namespace Icybee\Modules\Users\Roles;
 
 use ICanBoogie\I18n;
+use ICanBoogie\Module\Descriptor;
 use ICanBoogie\Operation;
 
 use Brickrouge\A;
@@ -81,25 +82,25 @@ class ManageBlock extends Form
 				continue;
 			}
 
-			$name = isset($descriptor[Module::T_TITLE]) ? $descriptor[Module::T_TITLE] : $m_id;
+			$name = isset($descriptor[Descriptor::TITLE]) ? $descriptor[Descriptor::TITLE] : $m_id;
 
-			if (isset($descriptor[Module::T_PERMISSION]))
+			if (isset($descriptor[Descriptor::PERMISSION]))
 			{
-				if ($descriptor[Module::T_PERMISSION] != Module::PERMISSION_NONE)
+				if ($descriptor[Descriptor::PERMISSION] != Module::PERMISSION_NONE)
 				{
 					$name .= ' <em>(';
-					$name .= Module::$levels[$descriptor[Module::T_PERMISSION]];
+					$name .= Module::$levels[$descriptor[Descriptor::PERMISSION]];
 					$name .= ')</em>';
 				}
-				else if (empty($descriptor[Module::T_PERMISSIONS]))
+				else if (empty($descriptor[Descriptor::PERMISSIONS]))
 				{
 					continue;
 				}
 			}
 
-			if (isset($descriptor[Module::T_CATEGORY]))
+			if (isset($descriptor[Descriptor::CATEGORY]))
 			{
-				$package = $descriptor[Module::T_CATEGORY];
+				$package = $descriptor[Descriptor::CATEGORY];
 			}
 			else
 			{
@@ -112,7 +113,7 @@ class ManageBlock extends Form
 			(
 				$descriptor, array
 				(
-					Module::T_ID => $m_id
+					Descriptor::ID => $m_id
 				)
 			);
 		}
@@ -125,7 +126,7 @@ class ManageBlock extends Form
 			(
 				I18n\t('General') => array
 				(
-					I18n\t('All') => array(Module::T_ID => 'all')
+					I18n\t('All') => array(Descriptor::ID => 'all')
 				)
 			),
 
@@ -271,7 +272,7 @@ EOT;
 
 			foreach ($modules as $m_name => $m_desc)
 			{
-				$m_id = $m_desc[Module::T_ID];
+				$m_id = $m_desc[Descriptor::ID];
 				$flat_id = strtr($m_id, '.', '_');
 
 
@@ -285,11 +286,11 @@ EOT;
 				{
 					$rc .= '<td>';
 
-					if (isset($m_desc[Module::T_PERMISSION]))
+					if (isset($m_desc[Descriptor::PERMISSION]))
 					{
-						if ($m_desc[Module::T_PERMISSION] != Module::PERMISSION_NONE)
+						if ($m_desc[Descriptor::PERMISSION] != Module::PERMISSION_NONE)
 						{
-							$level = $m_desc[Module::T_PERMISSION];
+							$level = $m_desc[Descriptor::PERMISSION];
 
 							$rc .= new Element
 							(
@@ -353,12 +354,12 @@ EOT;
 				# e.g. "modify own profile"
 				#
 
-				if (empty($m_desc[Module::T_PERMISSIONS]))
+				if (empty($m_desc[Descriptor::PERMISSIONS]))
 				{
 					continue;
 				}
 
-				$perms = $m_desc[Module::T_PERMISSIONS];
+				$perms = $m_desc[Descriptor::PERMISSIONS];
 
 				foreach ($perms as $pname)
 				{
