@@ -32,8 +32,6 @@ class PermissionsOperation extends \ICanBoogie\Operation
 
 	protected function process()
 	{
-		global $core;
-
 		$request = $this->request;
 		$model = $this->module->model;
 
@@ -52,13 +50,13 @@ class PermissionsOperation extends \ICanBoogie\Operation
 
 				if ($name === 'on')
 				{
-					if (isset($core->modules->descriptors[$perm]))
+					if (isset($this->app->modules->descriptors[$perm]))
 					{
 						#
 						# the module defines his permission level
 						#
 
-						$p[$perm] = $core->modules->descriptors[$perm][Descriptor::PERMISSION];
+						$p[$perm] = $this->app->modules->descriptors[$perm][Descriptor::PERMISSION];
 
 						continue;
 					}

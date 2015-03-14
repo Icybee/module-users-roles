@@ -32,13 +32,11 @@ class ManageBlock extends Form
 
 	public function __construct(Module $module, array $attributes=array())
 	{
-		global $core;
-
 		$this->module = $module;
 
 		$actions = null;
 
-		if ($core->user->has_permission(Module::PERMISSION_ADMINISTER, $module))
+		if ($this->app->user->has_permission(Module::PERMISSION_ADMINISTER, $module))
 		{
 			$actions = new Button
 			(
@@ -70,14 +68,14 @@ class ManageBlock extends Form
 
 	public function render()
 	{
-		global $core;
+		$app = \ICanBoogie\app();
 
 		$packages = array();
 		$modules = array();
 
-		foreach ($core->modules->descriptors as $m_id => $descriptor)
+		foreach ($app->modules->descriptors as $m_id => $descriptor)
 		{
-			if (!isset($core->modules[$m_id]))
+			if (!isset($app->modules[$m_id]))
 			{
 				continue;
 			}
@@ -154,7 +152,7 @@ class ManageBlock extends Form
 		//
 
 		$span = 1;
-		$context = $core->site->path;
+		$context = $app->site->path;
 
 		$rc .= '<thead>';
 		$rc .= '<tr>';
@@ -251,8 +249,8 @@ EOT;
 			$role_options[$i] = I18n\t('permission.' . $level, array(), array('default' => $level));
 		}
 
-		$user_has_access = $core->user->has_permission(Module::PERMISSION_ADMINISTER, $this->module);
-		$routes = $core->routes;
+		$user_has_access = $app->user->has_permission(Module::PERMISSION_ADMINISTER, $this->module);
+		$routes = $app->routes;
 
 		foreach ($packages as $p_name => $modules)
 		{

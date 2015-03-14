@@ -13,7 +13,7 @@ return array
 	(
 		'primary' => array
 		(
-			Model::T_SCHEMA => array
+			Model::SCHEMA => array
 			(
 				'fields' => array
 				(
