@@ -11,7 +11,7 @@
 
 namespace Icybee\Modules\Users\Roles;
 
-$hooks = __NAMESPACE__ . '\Hooks::';
+$hooks = Hooks::class . '::';
 
 return [
 

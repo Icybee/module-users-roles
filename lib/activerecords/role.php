@@ -11,11 +11,17 @@
 
 namespace Icybee\Modules\Users\Roles;
 
+use ICanBoogie\ActiveRecord;
+
 /**
  * A user role.
+ *
+ * @property array $perms
  */
-class Role extends \ICanBoogie\ActiveRecord
+class Role extends ActiveRecord
 {
+	const MODEL_ID = 'users.roles';
+
 	const RID = 'rid';
 	const NAME = 'name';
 	const PERMS = 'perms';
@@ -23,23 +29,24 @@ class Role extends \ICanBoogie\ActiveRecord
 	const GUEST_RID = 1;
 	const USER_RID = 2;
 
-	static public $permission_levels = array
-	(
+	static public $permission_levels = [
+
 		'none' => Module::PERMISSION_NONE,
 		'access' => Module::PERMISSION_ACCESS,
 		'create' => Module::PERMISSION_CREATE,
 		'maintain' => Module::PERMISSION_MAINTAIN,
 		'manage' => Module::PERMISSION_MANAGE,
 		'administer' => Module::PERMISSION_ADMINISTER
-	);
+
+	];
 
 	public $rid;
 	public $name;
 	public $serialized_perms;
 
-	public function __construct($model='users.roles')
+	protected function lazy_get_perms()
 	{
-		parent::__construct($model);
+		return (array) json_decode($this->serialized_perms, true);
 	}
 
 	/**
@@ -49,21 +56,15 @@ class Role extends \ICanBoogie\ActiveRecord
 	 */
 	public function to_array()
 	{
-		return parent::to_array() + array
-		(
+		return parent::to_array() + [
+
 			'perms' => $this->perms
-		);
+
+		];
 	}
 
-	protected function lazy_get_perms()
+	public function has_permission($access, $module = null)
 	{
-		return (array) json_decode($this->serialized_perms, true);
-	}
-
-	public function has_permission($access, $module=null)
-	{
-//		\ICanBoogie\log('has permission ? access: <em>\1</em>, module: <em>\2</em>', $access, (string) $module);
-
 		$perms = $this->perms;
 
 		#

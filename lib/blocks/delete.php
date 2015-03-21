@@ -11,6 +11,9 @@
 
 namespace Icybee\Modules\Users\Roles;
 
+/**
+ * @property Role $record
+ */
 class DeleteBlock extends \Icybee\DeleteBlock
 {
 	protected function get_record_name()

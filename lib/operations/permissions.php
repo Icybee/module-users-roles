@@ -11,21 +11,21 @@
 
 namespace Icybee\Modules\Users\Roles;
 
+use ICanBoogie\Errors;
 use ICanBoogie\Module\Descriptor;
 
 class PermissionsOperation extends \ICanBoogie\Operation
 {
 	protected function get_controls()
 	{
-		return array
-		(
-			self::CONTROL_PERMISSION => Module::PERMISSION_ADMINISTER
-		)
+		return [
 
-		+ parent::get_controls();
+			self::CONTROL_PERMISSION => Module::PERMISSION_ADMINISTER
+
+		] + parent::get_controls();
 	}
 
-	protected function validate(\ICanboogie\Errors $errors)
+	protected function validate(Errors $errors)
 	{
 		return true;
 	}
@@ -39,7 +39,7 @@ class PermissionsOperation extends \ICanBoogie\Operation
 		{
 			$role = $model[$rid];
 
-			$p = array();
+			$p = [];
 
 			foreach ($perms as $perm => $name)
 			{
@@ -79,7 +79,7 @@ class PermissionsOperation extends \ICanBoogie\Operation
 			$role->save();
 		}
 
-		$this->response->message = 'Permissions have been saved.';
+		$this->response->message = $this->format('Permissions have been saved.');
 
 		return true;
 	}

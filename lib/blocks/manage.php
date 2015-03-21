@@ -11,18 +11,21 @@
 
 namespace Icybee\Modules\Users\Roles;
 
-use ICanBoogie\I18n;
 use ICanBoogie\Module\Descriptor;
 use ICanBoogie\Operation;
 
 use Brickrouge\A;
 use Brickrouge\Button;
+use Brickrouge\Document;
 use Brickrouge\Element;
 use Brickrouge\Form;
 
+/**
+ * @property-read \ICanBoogie\Module\ModuleCollection $modules
+ */
 class ManageBlock extends Form
 {
-	static protected function add_assets(\Brickrouge\Document $document)
+	static protected function add_assets(Document $document)
 	{
 		parent::add_assets($document);
 
@@ -30,7 +33,12 @@ class ManageBlock extends Form
 		$document->css->add('manage.css');
 	}
 
-	public function __construct(Module $module, array $attributes=array())
+	protected function get_modules()
+	{
+		return $this->app->modules;
+	}
+
+	public function __construct(Module $module, array $attributes = [])
 	{
 		$this->module = $module;
 
@@ -38,44 +46,39 @@ class ManageBlock extends Form
 
 		if ($this->app->user->has_permission(Module::PERMISSION_ADMINISTER, $module))
 		{
-			$actions = new Button
-			(
-				'Save permissions', array
-				(
-					'class' => 'btn-primary',
-					'type' => 'submit',
-					'value' => Module::OPERATION_PERMISSIONS
-				)
-			);
+			$actions = new Button('Save permissions', [
+
+				'class' => 'btn-primary',
+				'type' => 'submit',
+				'value' => Module::OPERATION_PERMISSIONS
+
+			]);
 		}
 
-		parent::__construct
-		(
-			$attributes + array
-			(
-				self::ACTIONS => $actions,
-				self::HIDDENS => array
-				(
-					Operation::DESTINATION => $module->id,
-					Operation::NAME => Module::OPERATION_PERMISSIONS
-				),
+		parent::__construct($attributes + [
 
-				'class' => 'form-primary',
-				'name' => 'roles/manage'
-			)
-		);
+			self::ACTIONS => $actions,
+			self::HIDDENS => [
+
+				Operation::DESTINATION => $module->id,
+				Operation::NAME => Module::OPERATION_PERMISSIONS
+
+			],
+
+			'class' => 'form-primary',
+			'name' => 'roles/manage'
+
+		]);
 	}
 
 	public function render()
 	{
-		$app = \ICanBoogie\app();
+		$packages = [];
+		$modules = $this->modules;
 
-		$packages = array();
-		$modules = array();
-
-		foreach ($app->modules->descriptors as $m_id => $descriptor)
+		foreach ($modules->descriptors as $m_id => $descriptor)
 		{
-			if (!isset($app->modules[$m_id]))
+			if (!isset($modules[$m_id]))
 			{
 				continue;
 			}
@@ -105,31 +108,26 @@ class ManageBlock extends Form
 				list($package) = explode('.', $m_id);
 			}
 
-			$package = I18n\t($package, array(), array('scope' => 'module_category', 'default' => $package));
+			$package = $this->t($package, [], [ 'scope' => 'module_category', 'default' => $package ]);
 
-			$packages[$package][I18n\t($name)] = array_merge
-			(
-				$descriptor, array
-				(
-					Descriptor::ID => $m_id
-				)
-			);
+			$packages[$package][$this->t($name)] = array_merge($descriptor, [
+
+				Descriptor::ID => $m_id
+
+			]);
 		}
 
 		uksort($packages, 'ICanBoogie\unaccent_compare_ci');
 
-		$packages = array_merge
-		(
-			array
-			(
-				I18n\t('General') => array
-				(
-					I18n\t('All') => array(Descriptor::ID => 'all')
-				)
-			),
+		$packages = array_merge([
 
-			$packages
-		);
+			$this->t('General') => [
+
+				$this->t('All') => [ Descriptor::ID => 'all' ]
+
+			]
+
+		], $packages);
 
 		#
 		# load roles
@@ -152,6 +150,7 @@ class ManageBlock extends Form
 		//
 
 		$span = 1;
+		$app = $this->app;
 		$context = $app->site->path;
 
 		$rc .= '<thead>';
@@ -170,15 +169,13 @@ class ManageBlock extends Form
 			}
 			else
 			{
-				$rc .= new Element
-				(
-					'a', array
-					(
-						Element::INNER_HTML => $role->name,
-						'href' => $context . '/admin/' . $this->module . '/' . $role->rid . '/edit',
-						'title' => I18n\t('Edit entry')
-					)
-				);
+				$rc .= new Element('a', [
+
+					Element::INNER_HTML => $role->name,
+					'href' => $context . '/admin/' . $this->module . '/' . $role->rid . '/edit',
+					'title' => $this->t('Edit entry')
+
+				]);
 			}
 
 			$rc .= '</div></th>';
@@ -204,13 +201,11 @@ class ManageBlock extends Form
 				{
 					++$n;
 
-					$actions_rows .= new A
-					(
-						I18n\t('Delete', array(), array('scope' => 'button')), \ICanBoogie\Routing\contextualize('/admin/users.roles/' . $role->rid . '/delete'), array
-						(
-							'class' => 'btn btn-danger'
-						)
-					);
+					$actions_rows .= new A($this->t('Delete', [], [ 'scope' => 'button' ]), \ICanBoogie\Routing\contextualize('/admin/users.roles/' . $role->rid . '/delete'), [
+
+						'class' => 'btn btn-danger'
+
+					]);
 				}
 
 				$actions_rows .= '</td>';
@@ -241,12 +236,11 @@ EOT;
 		//
 		//
 
-
-		$role_options = array();
+		$role_options = [];
 
 		foreach (Module::$levels as $i => $level)
 		{
-			$role_options[$i] = I18n\t('permission.' . $level, array(), array('default' => $level));
+			$role_options[$i] = $this->t('permission.' . $level, [], [ 'default' => $level ]);
 		}
 
 		$user_has_access = $app->user->has_permission(Module::PERMISSION_ADMINISTER, $this->module);
@@ -290,14 +284,12 @@ EOT;
 						{
 							$level = $m_desc[Descriptor::PERMISSION];
 
-							$rc .= new Element
-							(
-								Element::TYPE_CHECKBOX, array
-								(
-									'name' => 'roles[' . $role->rid . '][' . $m_id . ']',
-									'checked' => isset($role->levels[$m_id]) && ($role->levels[$m_id] = $level)
-								)
-							);
+							$rc .= new Element(Element::TYPE_CHECKBOX, [
+
+								'name' => 'roles[' . $role->rid . '][' . $m_id . ']',
+								'checked' => isset($role->levels[$m_id]) && ($role->levels[$m_id] = $level)
+
+							]);
 						}
 						else
 						{
@@ -312,19 +304,17 @@ EOT;
 
 							if ($m_id != 'all')
 							{
-								$options = array('inherit' => '') + $options;
+								$options = [ 'inherit' => '' ] + $options;
 							}
 
-							$rc .= new Element
-							(
-								'select', array
-								(
-									Element::OPTIONS => $options,
+							$rc .= new Element('select', [
 
-									'name' => 'roles[' . $role->rid . '][' . $m_id . ']',
-									'value' => isset($role->perms[$m_id]) ? $role->perms[$m_id] : null
-								)
-							);
+								Element::OPTIONS => $options,
+
+								'name' => 'roles[' . $role->rid . '][' . $m_id . ']',
+								'value' => isset($role->perms[$m_id]) ? $role->perms[$m_id] : null
+
+							]);
 						}
 						else
 						{
@@ -365,18 +355,16 @@ EOT;
 
 					foreach ($roles as $role)
 					{
-						$columns .= '<td>' . new Element
-						(
-							Element::TYPE_CHECKBOX, array
-							(
-								'name' => $user_has_access ? 'roles[' . $role->rid . '][' . $pname . ']' : NULL,
-								'checked' => $role->has_permission($pname)
-							)
-						)
+						$columns .= '<td>' . new Element(Element::TYPE_CHECKBOX, [
+
+							'name' => $user_has_access ? 'roles[' . $role->rid . '][' . $pname . ']' : NULL,
+							'checked' => $role->has_permission($pname)
+
+						])
 						. '</td>';
 					}
 
-					$label = I18n\t($pname, array(), array('scope' => array($flat_id, 'permission')));
+					$label = $this->t($pname, [], [ 'scope' => [ $flat_id, 'permission' ] ]);
 
 					$rc .= <<<EOT
 <tr class="perm">

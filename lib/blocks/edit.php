@@ -17,24 +17,21 @@ use Brickrouge\Text;
 
 /**
  * A block to edit roles.
+ *
+ * @property Role $record
  */
 class EditBlock extends \Icybee\EditBlock
 {
 	protected function lazy_get_children()
 	{
-		return array_merge
-		(
-			parent::lazy_get_children(), array
-			(
-				Role::NAME => new Text
-				(
-					array
-					(
-						Form::LABEL => 'name',
-						Element::REQUIRED => true
-					)
-				)
-			)
-		);
+		return array_merge(parent::lazy_get_children(), [
+
+			Role::NAME => new Text([
+
+				Form::LABEL => 'name',
+				Element::REQUIRED => true
+
+			])
+		]);
 	}
 }

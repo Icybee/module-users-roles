@@ -1,24 +1,26 @@
 <?php
 
-return array
-(
+return [
+
 	'module_title.users_roles' => 'Rôles',
 
-	'users_roles' => array
-	(
-		'count' => array
-		(
+	'users_roles' => [
+
+		'count' => [
+
 			'name' => 'Aucun rôle',
 			'one' => 'Un rôle',
 			'other' => ':count rôles'
-		),
 
-		'name' => array
-		(
+		],
+
+		'name' => [
+
 			'one' => 'Rôle',
 			'other' => 'Rôles'
-		)
-	),
+
+		]
+	],
 
 	'Visitor' => 'Visiteur',
 
@@ -42,4 +44,5 @@ return array
 	# operation
 
 	'Permissions have been saved.' => 'Les permissions ont été enregistrées.'
-);
+
+];

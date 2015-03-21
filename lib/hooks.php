@@ -26,7 +26,7 @@ class Hooks
 	 *
 	 * @return mixed The resolved permission
 	 */
-	static public function resolve_user_permission(User $user, $permission, $target=null)
+	static public function resolve_user_permission(User $user, $permission, $target = null)
 	{
 		return $user->role->has_permission($permission, $target);
 	}
@@ -34,9 +34,10 @@ class Hooks
 	/**
 	 * Resolves the user ownership.
 	 *
+	 * @param User $user
 	 * @param ActiveRecord $record
 	 *
-	 * @return boolean `true` if the user has the ownership of the record.
+	 * @return bool `true` if the user has the ownership of the record.
 	 */
 	static public function resolve_user_ownership(User $user, ActiveRecord $record)
 	{

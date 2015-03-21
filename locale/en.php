@@ -1,6 +1,7 @@
 <?php
 
-return array
-(
+return [
+
 	'module_title.users_roles' => 'Roles'
-);
+
+];

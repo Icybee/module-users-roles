@@ -21,8 +21,10 @@ class Model extends \ICanBoogie\ActiveRecord\Model
 	/**
 	 * If defined, the property {@link Role::PERMS} is serialized using the {@link json_encode()}
 	 * function to set the property {@link Role::SERIALIZED_PERMS}.
+	 *
+	 * @inheritdoc
 	 */
-	public function save(array $properties, $key=null, array $options=array())
+	public function save(array $properties, $key = null, array $options = [])
 	{
 		if (isset($properties[Role::PERMS]))
 		{
@@ -34,16 +36,18 @@ class Model extends \ICanBoogie\ActiveRecord\Model
 
 	/**
 	 * @throws \Exception when on tries to delete the role with identifier "1".
+	 *
+	 * @inheritdoc
 	 */
-	public function delete($rid)
+	public function delete($key)
 	{
-		if ($rid == 1)
+		if ($key == 1)
 		{
-			throw new \Exception(\ICanBoogie\format('The role %role (%rid) cannot be deleted.', array('%role' => I18n\t('Visitor'), '%rid' => $rid)));
+			throw new \Exception(\ICanBoogie\format('The role %role (%rid) cannot be deleted.', [ '%role' => I18n\t('Visitor'), '%rid' => $key ]));
 		}
 
 		// FIXME-20110709: deleted role is not removed from users records.
 
-		return parent::delete($rid);
+		return parent::delete($key);
 	}
 }

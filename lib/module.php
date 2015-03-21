@@ -13,26 +13,30 @@ namespace Icybee\Modules\Users\Roles;
 
 use ICanBoogie\ActiveRecord\RecordNotFound;
 use ICanBoogie\ActiveRecord\StatementNotValid;
+use ICanBoogie\Errors;
 use ICanBoogie\I18n;
 
 class Module extends \Icybee\Module
 {
 	const OPERATION_PERMISSIONS = 'permissions';
 
-	static public $levels = array
-	(
+	static public $levels = [
+
 		self::PERMISSION_NONE => 'none',
 		self::PERMISSION_ACCESS => 'access',
 		self::PERMISSION_CREATE => 'create',
 		self::PERMISSION_MAINTAIN => 'maintain',
 		self::PERMISSION_MANAGE => 'manage',
 		self::PERMISSION_ADMINISTER => 'administer'
-	);
+
+	];
 
 	/**
 	 * Overrides the methods to create the "Visitor" and "User" roles.
+	 *
+	 * @inheritdoc
 	 */
-	public function install(\ICanBoogie\Errors $errors)
+	public function install(Errors $errors)
 	{
 		$rc = parent::install($errors);
 
@@ -49,15 +53,11 @@ class Module extends \Icybee\Module
 		}
 		catch (RecordNotFound $e)
 		{
-			$role = Role::from
-			(
-				array
-				(
-					Role::NAME => I18n\t('Visitor')
-				),
+			$role = Role::from([
 
-				array($model)
-			);
+				Role::NAME => I18n\t('Visitor')
+
+			], [ $model ]);
 
 			$role->save();
 		}
@@ -68,15 +68,11 @@ class Module extends \Icybee\Module
 		}
 		catch (RecordNotFound $e)
 		{
-			$role = Role::from
-			(
-				array
-				(
-					Role::NAME => I18n\t('User')
-				),
+			$role = Role::from([
 
-				array($model)
-			);
+				Role::NAME => I18n\t('User')
+
+			], [ $model ]);
 
 			$role->save();
 		}
@@ -84,7 +80,7 @@ class Module extends \Icybee\Module
 		return $rc;
 	}
 
-	public function is_installed(\ICanBoogie\Errors $errors)
+	public function is_installed(Errors $errors)
 	{
 		if (!parent::is_installed($errors))
 		{
@@ -93,7 +89,7 @@ class Module extends \Icybee\Module
 
 		try
 		{
-			$this->model->find(array(1, 2));
+			$this->model->find([ 1, 2 ]);
 		}
 		catch (StatementNotValid $e)
 		{

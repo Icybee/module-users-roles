@@ -11,6 +11,8 @@
 
 namespace Icybee\Modules\Users\Roles;
 
+use ICanBoogie\Errors;
+
 /**
  * Deletes a role.
  */
@@ -21,26 +23,29 @@ class DeleteOperation extends \ICanBoogie\DeleteOperation
 	 *
 	 *     PERMISSION: ADMINISTER
 	 *     OWNERSHIP: false
+	 *
+	 * @inheritdoc
 	 */
 	protected function get_controls()
 	{
-		return array
-		(
+		return [
+
 			self::CONTROL_PERMISSION => Module::PERMISSION_ADMINISTER,
 			self::CONTROL_OWNERSHIP => false
-		)
 
-		+ parent::get_controls();
+		] + parent::get_controls();
 	}
 
 	/**
 	 * The "visitor" (1) and "user" (2) roles cannot be deleted.
+	 *
+	 * @inheritdoc
 	 */
-	protected function validate(\ICanboogie\Errors $errors)
+	protected function validate(Errors $errors)
 	{
 		if ($this->key == 1 || $this->key == 2)
 		{
-			$errors[] = $errors->format('The role %name cannot be deleted.', array('name' => $this->record->name));
+			$errors[] = $errors->format('The role %name cannot be deleted.', [ 'name' => $this->record->name ]);
 		}
 
 		return parent::validate($errors);
