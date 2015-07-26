@@ -1,17 +1,12 @@
 <?php
 
-return [
+namespace Icybee\Modules\Users\Roles;
 
-	'!admin:manage' => [
+use ICanBoogie\HTTP\Request;
+use Icybee\Routing\RouteMaker as Make;
 
-	],
+return Make::admin('users.roles', Routing\RolesAdminController::class, [
 
-	'!admin:new' => [
+	'only' => [ 'index', 'create', 'edit' ]
 
-	],
-
-	'!admin:edit' => [
-
-	]
-
-];
+]);
