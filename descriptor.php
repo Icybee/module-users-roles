@@ -15,20 +15,16 @@ return [
 
 			Model::SCHEMA => [
 
-				'fields' => [
+				'rid' => 'serial',
+				'name' => [ 'varchar', 32, 'unique' => true ],
+				'serialized_perms' => 'text'
 
-					'rid' => 'serial',
-					'name' => [ 'varchar', 32, 'unique' => true ],
-					'serialized_perms' => 'text'
-
-				]
 			]
 		]
 	],
 
 	Descriptor::NS => __NAMESPACE__,
 	Descriptor::REQUIRED => true,
-	Descriptor::TITLE => 'Roles',
-	Descriptor::VERSION => '1.0'
+	Descriptor::TITLE => 'Roles'
 
 ];
