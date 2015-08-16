@@ -55,7 +55,7 @@ class Module extends \Icybee\Module
 		{
 			$role = Role::from([
 
-				Role::NAME => I18n\t('Visitor')
+				Role::NAME => $this->app->translate('Visitor')
 
 			], [ $model ]);
 
@@ -70,7 +70,7 @@ class Module extends \Icybee\Module
 		{
 			$role = Role::from([
 
-				Role::NAME => I18n\t('User')
+				Role::NAME => $this->app->translate('User')
 
 			], [ $model ]);
 
@@ -99,12 +99,12 @@ class Module extends \Icybee\Module
 		{
 			if (!$e->records[1])
 			{
-				$errors[$this->id] = I18n\t('Visitor role is missing');
+				$errors[$this->id] = $errors->format('Visitor role is missing');
 			}
 
 			if (!$e->records[2])
 			{
-				$errors[$this->id] = I18n\t('User role is missing');
+				$errors[$this->id] = $errors->format('User role is missing');
 			}
 		}
 

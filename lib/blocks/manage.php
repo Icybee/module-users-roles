@@ -22,6 +22,7 @@ use Brickrouge\Form;
 
 /**
  * @property-read \ICanBoogie\Module\ModuleCollection $modules
+ * @property-read \ICanBoogie\Core|\Icybee\Binding\CoreBindings $app
  */
 class ManageBlock extends Form
 {
@@ -201,7 +202,7 @@ class ManageBlock extends Form
 				{
 					++$n;
 
-					$actions_rows .= new A($this->t('Delete', [], [ 'scope' => 'button' ]), \ICanBoogie\Routing\contextualize('/admin/users.roles/' . $role->rid . '/delete'), [
+					$actions_rows .= new A($this->t('Delete', [], [ 'scope' => 'button' ]), $this->app->url_for("admin:users.roles:confirm-delete", $role), [
 
 						'class' => 'btn btn-danger'
 
@@ -248,13 +249,11 @@ EOT;
 
 		foreach ($packages as $p_name => $modules)
 		{
-			$rc .= '<tr class="listview-divider">';
-			$rc .= '<td colspan="' . $span . '">';
-			$rc .= $p_name;
-			$rc .= '</td>';
-			$rc .= '</tr>';
-
-			$n = 0;
+			$rc .= <<<EOT
+<tr class="listview-divider">
+<td colspan="{$span}">{$p_name}</td>
+</tr>
+EOT;
 
 			//
 			// admins
@@ -267,9 +266,7 @@ EOT;
 				$m_id = $m_desc[Descriptor::ID];
 				$flat_id = strtr($m_id, '.', '_');
 
-
 				$rc .= '<tr class="admin">';
-
 				$rc .= '<td>';
 				$rc .= $routes->find('/admin/' . $m_id) ? '<a href="' . $context . '/admin/' . $m_id . '">' . $m_name . '</a>' : $m_name;
 				$rc .= '</td>';

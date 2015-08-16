@@ -15,6 +15,8 @@ use ICanBoogie\I18n;
 
 /**
  * Primary model of the Roles module (users.roles).
+ *
+ * @property-read \ICanBoogie\Core|\Icybee\Binding\CoreBindings $app
  */
 class Model extends \ICanBoogie\ActiveRecord\Model
 {
@@ -43,7 +45,9 @@ class Model extends \ICanBoogie\ActiveRecord\Model
 	{
 		if ($key == 1)
 		{
-			throw new \Exception(\ICanBoogie\format('The role %role (%rid) cannot be deleted.', [ '%role' => I18n\t('Visitor'), '%rid' => $key ]));
+			throw new \Exception(\ICanBoogie\format('The role %role (%rid) cannot be deleted.', [
+				'%role' => $this->app->translate('Visitor'), '%rid' => $key
+			]));
 		}
 
 		// FIXME-20110709: deleted role is not removed from users records.

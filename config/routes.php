@@ -7,6 +7,7 @@ use Icybee\Routing\RouteMaker as Make;
 
 return Make::admin('users.roles', Routing\RolesAdminController::class, [
 
-	'only' => [ 'index', 'create', 'edit' ]
+	'id_name' => 'rid',
+	'only' => [ 'index', 'create', 'edit', 'confirm-delete' ]
 
 ]);
