@@ -11,6 +11,7 @@
 
 namespace Icybee\Modules\Users\Roles;
 
+use ICanBoogie\ActiveRecord\Model;
 use ICanBoogie\I18n;
 
 /**
@@ -18,7 +19,7 @@ use ICanBoogie\I18n;
  *
  * @property-read \ICanBoogie\Core|\Icybee\Binding\CoreBindings $app
  */
-class Model extends \ICanBoogie\ActiveRecord\Model
+class RoleModel extends Model
 {
 	/**
 	 * If defined, the property {@link Role::PERMS} is serialized using the {@link json_encode()}
