@@ -34,6 +34,7 @@ class PermissionsOperation extends \ICanBoogie\Operation
 	{
 		$request = $this->request;
 		$model = $this->module->model;
+		$descriptors = $this->app->modules->descriptors;
 
 		foreach ($request['roles'] as $rid => $perms)
 		{
@@ -48,15 +49,15 @@ class PermissionsOperation extends \ICanBoogie\Operation
 					continue;
 				}
 
-				if ($name === 'on')
+				if (filter_var($name, FILTER_VALIDATE_BOOLEAN))
 				{
-					if (isset($this->app->modules->descriptors[$perm]))
+					if (isset($descriptors[$perm]))
 					{
 						#
 						# the module defines his permission level
 						#
 
-						$p[$perm] = $this->app->modules->descriptors[$perm][Descriptor::PERMISSION];
+						$p[$perm] = $descriptors[$perm][Descriptor::PERMISSION];
 
 						continue;
 					}
@@ -80,6 +81,7 @@ class PermissionsOperation extends \ICanBoogie\Operation
 		}
 
 		$this->response->message = $this->format('Permissions have been saved.');
+		$this->response->location = $request->uri;
 
 		return true;
 	}
