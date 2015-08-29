@@ -1,7 +1,7 @@
 # customization
 
-PACKAGE_NAME = Icybee/Modules/Users/Roles
-PACKAGE_VERSION = 2.1.0
+PACKAGE_NAME = icybee/module-users-roles
+PACKAGE_VERSION = 3.0.0
 
 # do not edit the following lines
 

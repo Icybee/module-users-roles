@@ -16,10 +16,11 @@
 		"issues": "https://github.com/Icybee/module-users-roles/issues",
 		"source": "https://github.com/Icybee/module-users-roles"
 	},
+	"minimum-stability": "dev",
 	"require": {
 		"php": ">=5.5.0",
-		"icanboogie/module-installer": "~1.2.3",
-		"icybee/module-users": "2.1.x-dev"
+		"icanboogie/module-installer": "^1.2.3",
+		"icybee/module-users": "^3.0.0"
 	},
 	"autoload": {
 		"classmap": [ "lib" ]
