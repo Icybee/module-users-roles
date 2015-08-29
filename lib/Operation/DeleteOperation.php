@@ -9,14 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Users\Roles;
+namespace Icybee\Modules\Users\Roles\Operation;
 
 use ICanBoogie\Errors;
 
+use Icybee\Modules\Users\Roles\Module;
+use Icybee\Modules\Users\Roles\Role;
+
 /**
  * Deletes a role.
+ *
+ * @property Role $record
  */
-class DeleteOperation extends \ICanBoogie\DeleteOperation
+class DeleteOperation extends \ICanBoogie\Module\Operation\DeleteOperation
 {
 	/**
 	 * Modifies the following controls:

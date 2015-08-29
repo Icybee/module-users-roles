@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Users\Roles;
+namespace Icybee\Modules\Users\Roles\Operation;
 
 /**
  * Saves a role.
  */
-class SaveOperation extends \ICanBoogie\SaveOperation
+class SaveOperation extends \ICanBoogie\Module\Operation\SaveOperation
 {
 
 }

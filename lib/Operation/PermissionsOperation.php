@@ -9,12 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Users\Roles;
+namespace Icybee\Modules\Users\Roles\Operation;
 
 use ICanBoogie\Errors;
 use ICanBoogie\Module\Descriptor;
+use ICanBoogie\Operation;
 
-class PermissionsOperation extends \ICanBoogie\Operation
+use Icybee\Modules\Users\Roles\Module;
+use Icybee\Modules\Users\Roles\Role;
+
+class PermissionsOperation extends Operation
 {
 	protected function get_controls()
 	{
@@ -38,6 +42,8 @@ class PermissionsOperation extends \ICanBoogie\Operation
 
 		foreach ($request['roles'] as $rid => $perms)
 		{
+			/* @var $role Role */
+
 			$role = $model[$rid];
 
 			$p = [];
