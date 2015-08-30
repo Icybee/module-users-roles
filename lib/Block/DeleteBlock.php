@@ -9,12 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Users\Roles;
+namespace Icybee\Modules\Users\Roles\Block;
+
+use Icybee\Modules\Users\Roles\Role;
 
 /**
  * @property Role $record
  */
-class DeleteBlock extends \Icybee\DeleteBlock
+class DeleteBlock extends \Icybee\Block\DeleteBlock
 {
 	protected function get_record_name()
 	{

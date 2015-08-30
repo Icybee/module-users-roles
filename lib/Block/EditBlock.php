@@ -9,18 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Users\Roles;
+namespace Icybee\Modules\Users\Roles\Block;
 
 use Brickrouge\Element;
 use Brickrouge\Form;
 use Brickrouge\Text;
+
+use Icybee\Modules\Users\Roles\Role;
 
 /**
  * A block to edit roles.
  *
  * @property Role $record
  */
-class EditBlock extends \Icybee\EditBlock
+class EditBlock extends \Icybee\Block\EditBlock
 {
 	protected function lazy_get_children()
 	{

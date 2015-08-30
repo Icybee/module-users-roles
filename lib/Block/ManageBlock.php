@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Users\Roles;
+namespace Icybee\Modules\Users\Roles\Block;
 
 use ICanBoogie\Module\Descriptor;
 use ICanBoogie\Operation;
@@ -19,6 +19,8 @@ use Brickrouge\Button;
 use Brickrouge\Document;
 use Brickrouge\Element;
 use Brickrouge\Form;
+
+use Icybee\Modules\Users\Roles\Module;
 
 /**
  * @property-read \ICanBoogie\Module\ModuleCollection $modules
@@ -31,7 +33,7 @@ class ManageBlock extends Form
 		parent::add_assets($document);
 
 		$document->css->add(\Icybee\ASSETS . 'css/manage.css', -170);
-		$document->css->add('manage.css');
+		$document->css->add(__DIR__ . '/ManageBlock.css');
 	}
 
 	protected function get_modules()
