@@ -50,7 +50,7 @@ class DeleteOperation extends \ICanBoogie\Module\Operation\DeleteOperation
 	{
 		if ($this->key == 1 || $this->key == 2)
 		{
-			$errors[] = $errors->format('The role %name cannot be deleted.', [ 'name' => $this->record->name ]);
+			$errors->add(null, "The role %name cannot be deleted.", [ 'name' => $this->record->name ]);
 		}
 
 		return parent::validate($errors);

@@ -99,12 +99,12 @@ class Module extends \Icybee\Module
 		{
 			if (!$e->records[1])
 			{
-				$errors[$this->id] = $errors->format('Visitor role is missing');
+				$errors->add($this->id, "Visitor role is missing");
 			}
 
 			if (!$e->records[2])
 			{
-				$errors[$this->id] = $errors->format('User role is missing');
+				$errors->add($this->id, "User role is missing");
 			}
 		}
 
