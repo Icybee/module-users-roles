@@ -31,3 +31,8 @@
 .block--users-roles--manage select {
 	width: auto;
 }
+
+.listview .form-control {
+	font-size: inherit;
+	display: inline-block;
+}

@@ -311,7 +311,8 @@ EOT;
 								Element::OPTIONS => $options,
 
 								'name' => 'roles[' . $role->rid . '][' . $m_id . ']',
-								'value' => isset($role->perms[$m_id]) ? $role->perms[$m_id] : null
+								'value' => isset($role->perms[$m_id]) ? $role->perms[$m_id] : null,
+								'class' => 'form-control'
 
 							]);
 						}
