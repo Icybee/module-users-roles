@@ -13,7 +13,7 @@ namespace Icybee\Modules\Users\Roles;
 
 use ICanBoogie\ActiveRecord\RecordNotFound;
 use ICanBoogie\ActiveRecord\StatementNotValid;
-use ICanBoogie\Errors;
+use ICanBoogie\ErrorCollection;
 use ICanBoogie\I18n;
 
 class Module extends \Icybee\Module
@@ -36,7 +36,7 @@ class Module extends \Icybee\Module
 	 *
 	 * @inheritdoc
 	 */
-	public function install(Errors $errors)
+	public function install(ErrorCollection $errors)
 	{
 		$rc = parent::install($errors);
 
@@ -80,7 +80,7 @@ class Module extends \Icybee\Module
 		return $rc;
 	}
 
-	public function is_installed(Errors $errors)
+	public function is_installed(ErrorCollection $errors)
 	{
 		if (!parent::is_installed($errors))
 		{

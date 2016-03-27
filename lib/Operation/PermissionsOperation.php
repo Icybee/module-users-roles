@@ -11,7 +11,7 @@
 
 namespace Icybee\Modules\Users\Roles\Operation;
 
-use ICanBoogie\Errors;
+use ICanBoogie\ErrorCollection;
 use ICanBoogie\Module\Descriptor;
 use ICanBoogie\Operation;
 
@@ -29,7 +29,10 @@ class PermissionsOperation extends Operation
 		] + parent::get_controls();
 	}
 
-	protected function validate(Errors $errors)
+	/**
+	 * @inheritdoc
+	 */
+	protected function validate(ErrorCollection $errors)
 	{
 		return true;
 	}

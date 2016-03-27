@@ -11,7 +11,7 @@
 
 namespace Icybee\Modules\Users\Roles\Operation;
 
-use ICanBoogie\Errors;
+use ICanBoogie\ErrorCollection;
 
 use Icybee\Modules\Users\Roles\Module;
 use Icybee\Modules\Users\Roles\Role;
@@ -46,11 +46,11 @@ class DeleteOperation extends \ICanBoogie\Module\Operation\DeleteOperation
 	 *
 	 * @inheritdoc
 	 */
-	protected function validate(Errors $errors)
+	protected function validate(ErrorCollection $errors)
 	{
 		if ($this->key == 1 || $this->key == 2)
 		{
-			$errors->add(null, "The role %name cannot be deleted.", [ 'name' => $this->record->name ]);
+			$errors->add_generic("The role %name cannot be deleted.", [ 'name' => $this->record->name ]);
 		}
 
 		return parent::validate($errors);
