@@ -21,10 +21,12 @@ use Brickrouge\Element;
 use Brickrouge\Form;
 
 use Icybee\Modules\Users\Roles\Module;
+use Icybee\Modules\Users\Roles\Role;
 
 /**
  * @property-read \ICanBoogie\Module\ModuleCollection $modules
  * @property-read \ICanBoogie\Core|\Icybee\Binding\CoreBindings $app
+ * @property-read Module $module
  */
 class ManageBlock extends Form
 {
@@ -136,6 +138,7 @@ class ManageBlock extends Form
 		# load roles
 		#
 
+		/* @var $roles Role[] */
 		$roles = $this->module->model->all;
 
 		//
@@ -168,7 +171,7 @@ class ManageBlock extends Form
 
 			if ($role->rid == 0)
 			{
-				$rc .= $role->title;
+				$rc .= $role->name;
 			}
 			else
 			{
@@ -219,14 +222,8 @@ class ManageBlock extends Form
 				$rc .= <<<EOT
 <tfoot>
 	<tr class="footer">
-		<td>
-		<div class="jobs">
-			<a class="operation-delete" href="#" rel="op-delete">Delete the selected entries</a>
-		</div>
-		</td>
-
+		<td>&nbsp;</td>
 		$actions_rows
-
 	</tr>
 </tfoot>
 EOT;
@@ -277,7 +274,7 @@ EOT;
 				{
 					$rc .= '<td>';
 
-					if (isset($m_desc[Descriptor::PERMISSION]))
+					if (isset($m_desc[Descriptor::PERMISSION])) // TODO-20160507: is this still used?
 					{
 						if ($m_desc[Descriptor::PERMISSION] != Module::PERMISSION_NONE)
 						{
@@ -286,7 +283,7 @@ EOT;
 							$rc .= new Element(Element::TYPE_CHECKBOX, [
 
 								'name' => 'roles[' . $role->rid . '][' . $m_id . ']',
-								'checked' => isset($role->levels[$m_id]) && ($role->levels[$m_id] = $level)
+								'checked' => isset($role->perms[$m_id]) && ($role->perms[$m_id] = $level)
 
 							]);
 						}
@@ -349,7 +346,7 @@ EOT;
 
 				$perms = $m_desc[Descriptor::PERMISSIONS];
 
-				foreach ($perms as $pname)
+				foreach ($perms as $perm)
 				{
 					$columns = '';
 
@@ -357,18 +354,18 @@ EOT;
 					{
 						$columns .= '<td>' . new Element(Element::TYPE_CHECKBOX, [
 
-							'name' => $user_has_access ? 'roles[' . $role->rid . '][' . $pname . ']' : NULL,
-							'checked' => $role->has_permission($pname)
+							'name' => $user_has_access ? 'roles[' . $role->rid . '][' . $perm . ']' : NULL,
+							'checked' => $role->has_permission($perm)
 
 						])
 						. '</td>';
 					}
 
-					$label = $this->t($pname, [], [ 'scope' => [ $flat_id, 'permission' ] ]);
+					$label = $this->t($perm, [], [ 'scope' => [ $flat_id, 'permission' ] ]);
 
 					$rc .= <<<EOT
 <tr class="perm">
-	<td><span title="$pname">$label</span></td>
+	<td><span title="$perm">$label</span></td>
 	$columns
 </tr>
 EOT;

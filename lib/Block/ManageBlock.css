@@ -17,11 +17,11 @@
 }
 
 .block--users-roles--manage tr.admin td:first-child {
-	padding-left: 32px;
+	padding-left: 2rem;
 }
 
 .block--users-roles--manage tr.perm td:first-child {
-	padding-left: 48px;
+	padding-left: 3rem;
 }
 
 .block--users-roles--manage .form-actions {
