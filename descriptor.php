@@ -25,6 +25,7 @@ return [
 
 	Descriptor::NS => __NAMESPACE__,
 	Descriptor::REQUIRED => true,
+	Descriptor::REQUIRES => [ 'users' ],
 	Descriptor::TITLE => 'Roles'
 
 ];

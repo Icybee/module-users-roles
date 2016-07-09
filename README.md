@@ -13,6 +13,20 @@ Provides roles for users.
 
 
 
+## Bindings
+
+The following prototype bindings are provided for [User][] instances:
+
+- `$roles`: The roles associated with a user.
+
+	```php
+	$user->roles; // Icybee\Modules\Users\Roles\Role[]
+	```
+
+
+
+
+
 ----------
 
 
@@ -32,7 +46,7 @@ The package requires PHP 5.5 or later.
 The recommended way to install this package is through [Composer](http://getcomposer.org/):
 
 ```
-$ composer require icybee/module-users-roles-roles
+$ composer require icybee/module-users-roles
 ```
 
 This module is part of the modules required by [Icybee](http://icybee.org).
@@ -46,7 +60,7 @@ This module is part of the modules required by [Icybee](http://icybee.org).
 The package is [available on GitHub](https://github.com/Icybee/module-users-roles-roles), its repository can be
 cloned with the following command line:
 
-	$ git clone https://github.com/Icybee/module-users-roles-roles.git users.roles
+	$ git clone https://github.com/Icybee/module-users-roles.git users.roles
 
 
 
@@ -67,3 +81,10 @@ cleaned with the `make clean` command.
 ## License
 
 The module is licensed under the New BSD License - See the LICENSE file for details.
+
+
+
+
+
+
+[User]: https://github.com/Icybee/module-users/blob/3.0/lib/User.php

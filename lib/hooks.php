@@ -48,4 +48,53 @@ class Hooks
 			return true;
 		}
 	}
+
+	/*
+	 * Prototype
+	 */
+
+	/**
+	 * Returns all the roles associated with the user.
+	 *
+	 * @param User $user
+	 *
+	 * @return Role[]
+	 */
+	static public function user_get_roles(User $user)
+	{
+		$models = $user->model->models;
+
+		try
+		{
+			if (!$user->uid)
+			{
+				return [ $models['users.roles'][Role::GUEST_RID] ];
+			}
+		}
+		catch (\Exception $e)
+		{
+			return [];
+		}
+
+		$rids = $models['users/has_many_roles']
+			->select('rid')
+			->filter_by_uid($user->uid)
+			->all(\PDO::FETCH_COLUMN);
+
+		if (!in_array(Role::USER_RID, $rids))
+		{
+			array_unshift($rids, Role::USER_RID);
+		}
+
+		try
+		{
+			return $models['users.roles']->find($rids);
+		}
+		catch (ActiveRecord\RecordNotFound $e)
+		{
+			trigger_error($e->getMessage());
+
+			return array_filter($e->records);
+		}
+	}
 }
