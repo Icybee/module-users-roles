@@ -13,6 +13,7 @@ namespace Icybee\Modules\Users\Roles;
 
 use ICanBoogie\ActiveRecord;
 
+use Icybee\Modules\Users\Roles\Binding\UserBindings;
 use Icybee\Modules\Users\User;
 
 class Hooks
@@ -20,7 +21,7 @@ class Hooks
 	/**
 	 * Resolves a user permission according to the roles managed by the module.
 	 *
-	 * @param User $user
+	 * @param User|UserBindings $user
 	 * @param string $permission
 	 * @param string $target
 	 *
@@ -34,7 +35,7 @@ class Hooks
 	/**
 	 * Resolves the user ownership.
 	 *
-	 * @param User $user
+	 * @param User|UserBindings $user
 	 * @param ActiveRecord $record
 	 *
 	 * @return bool `true` if the user has the ownership of the record.
@@ -54,7 +55,7 @@ class Hooks
 	 */
 
 	/**
-	 * Returns all the roles associated with the user.
+	 * Return the roles associated with the user.
 	 *
 	 * @param User $user
 	 *
@@ -96,5 +97,35 @@ class Hooks
 
 			return array_filter($e->records);
 		}
+	}
+
+	/**
+	 * Return the (aggregate) role of the user.
+	 *
+	 * @param User|UserBindings $user
+	 *
+	 * @return Role
+	 */
+	static public function user_get_role(User $user)
+	{
+		$permissions = [];
+		$names = [];
+
+		foreach ($user->roles as $role)
+		{
+			$names[] = $role->name;
+
+			foreach ($role->perms as $access => $permission)
+			{
+				$permissions[$access] = $permission;
+			}
+		}
+
+		return Role::from([
+
+			Role::PERMS => $permissions,
+			Role::NAME => implode(', ', $names)
+
+		]);
 	}
 }

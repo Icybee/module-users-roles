@@ -23,6 +23,12 @@ The following prototype bindings are provided for [User][] instances:
 	$user->roles; // Icybee\Modules\Users\Roles\Role[]
 	```
 
+- `$role`: The aggregate role associated with a user.
+
+	```php
+	$user->role; // Icybee\Modules\Users\Roles\Role
+	```
+
 
 
 
