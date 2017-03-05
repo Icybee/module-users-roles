@@ -1,10 +1,10 @@
 # Roles
 
 [![Release](https://img.shields.io/packagist/v/icybee/module-users-roles.svg)](https://packagist.org/packages/icybee/module-users-roles)
-[![Build Status](https://img.shields.io/travis/Icybee/module-users-roles/master.svg)](https://travis-ci.org/Icybee/module-users-roles)
+[![Build Status](https://img.shields.io/travis/Icybee/module-users-roles.svg)](https://travis-ci.org/Icybee/module-users-roles)
 [![HHVM](https://img.shields.io/hhvm/icybee/module-users-roles.svg)](http://hhvm.h4cc.de/package/icybee/module-users-roles)
-[![Code Quality](https://img.shields.io/scrutinizer/g/Icybee/module-users-roles/master.svg)](https://scrutinizer-ci.com/g/Icybee/module-users-roles)
-[![Code Coverage](https://img.shields.io/coveralls/Icybee/module-users-roles/master.svg)](https://coveralls.io/r/Icybee/module-users-roles)
+[![Code Quality](https://img.shields.io/scrutinizer/g/Icybee/module-users-roles.svg)](https://scrutinizer-ci.com/g/Icybee/module-users-roles)
+[![Code Coverage](https://img.shields.io/coveralls/Icybee/module-users-roles.svg)](https://coveralls.io/r/Icybee/module-users-roles)
 [![Packagist](https://img.shields.io/packagist/dt/icybee/module-users-roles.svg)](https://packagist.org/packages/icybee/module-users-roles)
 
 Provides roles for users.
