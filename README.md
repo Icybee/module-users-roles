@@ -41,7 +41,7 @@ The following prototype bindings are provided for [User][] instances:
 
 ## Requirement
 
-The package requires PHP 5.5 or later.
+The package requires PHP 5.6 or later.
 
 
 

@@ -13,7 +13,7 @@
 >
     <testsuites>
         <testsuite name="icybee/module-users-roles">
-            <directory>./tests</directory>
+            <directory>./tests/lib</directory>
         </testsuite>
     </testsuites>
 
