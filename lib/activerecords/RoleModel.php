@@ -17,7 +17,7 @@ use ICanBoogie\I18n;
 /**
  * Primary model of the Roles module (users.roles).
  *
- * @property-read \ICanBoogie\Core|\Icybee\Binding\CoreBindings $app
+ * @property-read \ICanBoogie\Application $app
  */
 class RoleModel extends Model
 {

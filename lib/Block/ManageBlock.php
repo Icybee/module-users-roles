@@ -25,7 +25,7 @@ use Icybee\Modules\Users\Roles\Role;
 
 /**
  * @property-read \ICanBoogie\Module\ModuleCollection $modules
- * @property-read \ICanBoogie\Core|\Icybee\Binding\CoreBindings $app
+ * @property-read \ICanBoogie\Application $app
  * @property-read Module $module
  */
 class ManageBlock extends Form
