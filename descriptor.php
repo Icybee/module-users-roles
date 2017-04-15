@@ -9,6 +9,7 @@ return [
 
 	Descriptor::CATEGORY => 'users',
 	Descriptor::DESCRIPTION => 'Role management',
+	Descriptor::ID => 'users.roles',
 	Descriptor::MODELS => [
 
 		'primary' => [
@@ -24,7 +25,6 @@ return [
 	],
 
 	Descriptor::NS => __NAMESPACE__,
-	Descriptor::REQUIRED => true,
 	Descriptor::REQUIRES => [ 'users' ],
 	Descriptor::TITLE => 'Roles'
 
